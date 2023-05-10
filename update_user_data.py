@@ -253,7 +253,7 @@ def nr_days(d1, d2):
 
 
 # date_1 = date_n(2023, 4, 9)
-date_2 = date_n(2023, 5, 9)
+date_2 = date_n(2023, 5, 10)
 
 
 # print(nr_days(date_1, date_2))
@@ -290,7 +290,7 @@ def update_golden_eggs_sent_daily():
         print('gifts sent', row[3])
         if nr_days_joined != 0 and nr_days_joined == row[3]:
             print('sent daily', row[0])
-            full_days = 31
+            full_days = 32
             connection.execute(f'UPDATE userData '
                                f'SET Daily_Gifts_Sent = {full_days} '
                                f'WHERE USER_NAME = "{row[0]}"')
@@ -307,6 +307,8 @@ def update_golden_eggs_sent_daily():
 
     connection.commit()
     connection.close()
+
+update_golden_eggs_sent_daily()
 
 
 def gifts_exchanged_iron(user_name):
@@ -487,8 +489,6 @@ def update_gift_king_weed():
 
     connection.commit()
     connection.close()
-
-update_gift_king_weed()
 
 
 def get_everything(user_name):

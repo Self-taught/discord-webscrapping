@@ -91,4 +91,4 @@ if user_name:
 else:
     load_data()
 
-st.text('The daily gifts sent are 32 max for those who sent daily. Then No. of Missed days = 32 - days sent.')
+st.text('The daily gifts sent are 32 max for those who sent daily. For others, it"s No. of Missed days = 32 - days sent you sent gift.')

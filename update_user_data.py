@@ -514,6 +514,7 @@ def gifts_exchanged_mystery_seed(user_name):
     connection.close()
     return nr
 
+
 def update_gift_mystery_seed():
     connection = sqlite3.connect('user_data_new.db')
     cursor = connection.execute('SELECT USER_NAME from userData')
@@ -606,6 +607,7 @@ def calculate_gifts_sent():
     connection.close()
     print(total_points)
     return total_points
+
 
 def calculate_raffle_points():
     connection = sqlite3.connect('user_data_new.db')

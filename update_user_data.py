@@ -308,8 +308,6 @@ def update_golden_eggs_sent_daily():
     connection.commit()
     connection.close()
 
-update_golden_eggs_sent_daily()
-
 
 def gifts_exchanged_iron(user_name):
     connection = sqlite3.connect('easterData0905_2.db')
@@ -489,6 +487,43 @@ def update_gift_king_weed():
 
     connection.commit()
     connection.close()
+
+
+def gifts_exchanged_lucky_cat(user_name):
+    connection = sqlite3.connect('easterData0905_2.db')
+    cursor = connection.execute(f"SELECT * from easterData WHERE USER_NAME='@{user_name}'")
+
+    nr = 0
+    pattern = f"[a-zA-Z0-9\.\-]+ exchanged  \d+ Golden Ticket for (\d+) Lucky Cat"
+
+    for row in cursor:
+        if re.search(pattern, row[2]):
+            match = re.search(pattern, row[2])
+            lucky_cat = int(match.group(1))
+            nr += lucky_cat
+
+    print(nr)
+    connection.close()
+    return nr
+
+
+# gifts_exchanged_lucky_cat('looftee')
+
+
+def update_gift_lucky_cat():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute('SELECT USER_NAME from userData')
+
+    for row in cursor:
+        print(row[0])
+        nr_lucky_cat = gifts_exchanged_lucky_cat(row[0])
+        connection.execute(f'UPDATE userData '
+                           f'SET Lucky_Cat_Exchanged = {nr_lucky_cat} '
+                           f'WHERE USER_NAME = "{row[0]}"')
+
+    connection.commit()
+    connection.close()
+
 
 
 def get_everything(user_name):

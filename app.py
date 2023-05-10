@@ -25,7 +25,7 @@ import sqlite3
 
 # connection = sqlite3.connect('user_data_new.db')
 # connection.execute('''ALTER TABLE userData
-# ADD Lucky_Cat_Exchanged INT;
+# ADD Mystery_Seed_Exchanged INT;
 # ''')
 #
 # connection.close()

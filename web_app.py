@@ -29,7 +29,7 @@ def load_data():
     df = pd.DataFrame(rows, columns=["USER_NAME", "Easter_Eggs_Earned", "Gifts_Received", "Gifts_Sent",
                                      "Raffle_Points_Earned", "Daily_Gifts_Sent", "Golden_Eggs_Bought", "Reward_Chest_Bought",
                                      "Iron_Ore_Exchanged", "Fairy_Garden_Exchanged", "Beta_Packs_Exchanged", "Alpha_Packs_Exchanged",
-                                     "King_Weed_Exchanged", "Lucky_Cat_Exchanged"])
+                                     "King_Weed_Exchanged", "Lucky_Cat_Exchanged", "Mystery_Seed_Exchanged"])
 
     st.dataframe(df, use_container_width=True, width=500, height=500)
 
@@ -52,7 +52,7 @@ def load_data_single(user_name):
                                      "Reward_Chest_Bought",
                                      "Iron_Ore_Exchanged", "Fairy_Garden_Exchanged", "Beta_Packs_Exchanged",
                                      "Alpha_Packs_Exchanged",
-                                     "King_Weed_Exchanged", "Lucky_Cat_Exchanged"])
+                                     "King_Weed_Exchanged", "Lucky_Cat_Exchanged", "Mystery_Seed_Exchanged"])
 
     st.dataframe(df, use_container_width=True, width=500, height=500)
 
@@ -74,8 +74,8 @@ def load_data_multiple(user_name1, user_name2):
                                      "Raffle_Points_Earned", "Daily_Gifts_Sent", "Golden_Eggs_Bought",
                                      "Reward_Chest_Bought",
                                      "Iron_Ore_Exchanged", "Fairy_Garden_Exchanged", "Beta_Packs_Exchanged",
-                                     "Alpha_Packs_Exchanged",
-                                     "King_Weed_Exchanged", "Lucky_Cat_Exchanged"])
+                                     "Alpha_Packs_Exchanged", "King_Weed_Exchanged", "Lucky_Cat_Exchanged",
+                                     "Mystery_Seed_Exchanged"])
 
     st.dataframe(df, use_container_width=True, width=500, height=500)
 

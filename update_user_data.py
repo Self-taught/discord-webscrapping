@@ -435,8 +435,6 @@ def gifts_exchanged_alpha_packs(user_name):
     return nr
 
 
-# gifts_exchanged_alpha_packs('drakienrising')
-
 
 def update_gift_alpha_packs():
     connection = sqlite3.connect('user_data_new.db')
@@ -470,8 +468,6 @@ def gifts_exchanged_king_weed(user_name):
     connection.close()
     return nr
 
-
-# gifts_exchanged_alpha_packs('drakienrising')
 
 
 def update_gift_king_weed():
@@ -507,7 +503,6 @@ def gifts_exchanged_lucky_cat(user_name):
     return nr
 
 
-# gifts_exchanged_lucky_cat('looftee')
 
 
 def update_gift_lucky_cat():
@@ -524,7 +519,38 @@ def update_gift_lucky_cat():
     connection.commit()
     connection.close()
 
+def gifts_exchanged_mystery_seed(user_name):
+    connection = sqlite3.connect('easterData0905_2.db')
+    cursor = connection.execute(f"SELECT * from easterData WHERE USER_NAME='@{user_name}'")
 
+    nr = 0
+    pattern = f"[a-zA-Z0-9\.\-]+ exchanged  \d+ Easter Egg for (\d+) Mystery Seed"
+
+    for row in cursor:
+        if re.search(pattern, row[2]):
+            match = re.search(pattern, row[2])
+            mystery_seed = int(match.group(1))
+            nr += mystery_seed
+
+    print(nr)
+    connection.close()
+    return nr
+
+def update_gift_mystery_seed():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute('SELECT USER_NAME from userData')
+
+    for row in cursor:
+        print(row[0])
+        nr_mystery_seed = gifts_exchanged_mystery_seed(row[0])
+        connection.execute(f'UPDATE userData '
+                           f'SET Mystery_Seed_Exchanged = {nr_mystery_seed} '
+                           f'WHERE USER_NAME = "{row[0]}"')
+
+    connection.commit()
+    connection.close()
+
+update_gift_mystery_seed()
 
 def get_everything(user_name):
     connection = sqlite3.connect('old_data/easterData26.db')

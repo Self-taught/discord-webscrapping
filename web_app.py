@@ -2,6 +2,7 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 
+st.set_page_config(layout="wide")
 st.title('Easter 2023 Dcrops')
 st.subheader("Find a single user or compare two users data")
 user_name = st.text_input('Find A User Data', key='user_name', placeholder="To compare two users, type user1,user2 withour any space")
@@ -89,3 +90,5 @@ if user_name:
         load_data_single(user_name)
 else:
     load_data()
+
+st.text('The daily gifts sent are 32 max for those who sent daily. Then No. of Missed days = 32 - days sent.')

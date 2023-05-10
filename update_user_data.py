@@ -235,19 +235,6 @@ def update_raffle_points_golden():
     connection.close()
 
 
-def calculate_raffle_points():
-    connection = sqlite3.connect('user_data_new.db')
-    cursor = connection.execute("SELECT Raffle_Points_Earned from userData")
-
-    total_points = 0
-
-    for row in cursor:
-        total_points += row[0]
-
-    connection.close()
-    print(total_points)
-
-
 def nr_days(d1, d2):
     return (d2 - d1).days
 
@@ -577,3 +564,99 @@ def total_user():
 
     connection2.commit()
     connection2.close()
+
+
+def calculate_easter_eggs_earned():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute("SELECT Easter_Eggs_Earned from userData")
+
+    total_points = 0
+
+    for row in cursor:
+        total_points += row[0]
+
+    connection.close()
+    print(total_points)
+    return total_points
+
+
+def calculate_gifts_received():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute("SELECT Gifts_Received from userData")
+
+    total_points = 0
+
+    for row in cursor:
+        total_points += row[0]
+
+    connection.close()
+    print(total_points)
+    return total_points
+
+
+def calculate_gifts_sent():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute("SELECT Gifts_Sent from userData")
+
+    total_points = 0
+
+    for row in cursor:
+        total_points += row[0]
+
+    connection.close()
+    print(total_points)
+    return total_points
+
+def calculate_raffle_points():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute("SELECT Raffle_Points_Earned from userData")
+
+    total_points = 0
+
+    for row in cursor:
+        total_points += row[0]
+
+    connection.close()
+    print(total_points)
+    return total_points
+
+
+def calculate_golden_eggs_bought():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute("SELECT Golden_Eggs_Bought from userData")
+
+    total_points = 0
+
+    for row in cursor:
+        total_points += row[0]
+
+    connection.close()
+    print(total_points)
+    return total_points
+
+
+def calculate_reward_chest_exchanged():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute("SELECT Reward_Chest_Bought from userData")
+
+    total_points = 0
+
+    for row in cursor:
+        total_points += row[0]
+
+    connection.close()
+    print(total_points)
+    return total_points
+
+
+def calculate_raffle_points():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute("SELECT Raffle_Points_Earned from userData")
+
+    total_points = 0
+
+    for row in cursor:
+        total_points += row[0]
+
+    connection.close()
+    print(total_points)

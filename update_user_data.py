@@ -327,9 +327,6 @@ def gifts_exchanged_iron(user_name):
     return nr
 
 
-# gifts_exchanged_iron('looftee')
-
-
 def update_gift_iron():
     connection = sqlite3.connect('user_data_new.db')
     cursor = connection.execute('SELECT USER_NAME from userData')
@@ -399,9 +396,6 @@ def gifts_exchanged_beta_packs(user_name):
     return nr
 
 
-# gifts_exchanged_beta_packs('looftee')
-
-
 def update_gift_beta_packs():
     connection = sqlite3.connect('user_data_new.db')
     cursor = connection.execute('SELECT USER_NAME from userData')
@@ -433,7 +427,6 @@ def gifts_exchanged_alpha_packs(user_name):
     print(nr)
     connection.close()
     return nr
-
 
 
 def update_gift_alpha_packs():
@@ -469,7 +462,6 @@ def gifts_exchanged_king_weed(user_name):
     return nr
 
 
-
 def update_gift_king_weed():
     connection = sqlite3.connect('user_data_new.db')
     cursor = connection.execute('SELECT USER_NAME from userData')
@@ -503,8 +495,6 @@ def gifts_exchanged_lucky_cat(user_name):
     return nr
 
 
-
-
 def update_gift_lucky_cat():
     connection = sqlite3.connect('user_data_new.db')
     cursor = connection.execute('SELECT USER_NAME from userData')
@@ -518,6 +508,7 @@ def update_gift_lucky_cat():
 
     connection.commit()
     connection.close()
+
 
 def gifts_exchanged_mystery_seed(user_name):
     connection = sqlite3.connect('easterData0905_2.db')
@@ -550,7 +541,6 @@ def update_gift_mystery_seed():
     connection.commit()
     connection.close()
 
-update_gift_mystery_seed()
 
 def get_everything(user_name):
     connection = sqlite3.connect('old_data/easterData26.db')

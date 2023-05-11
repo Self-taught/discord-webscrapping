@@ -59,6 +59,7 @@ def load_data():
 
     # Convert the data to a DataFrame
     df = pd.DataFrame(rows, columns=column_data)
+    df = df.sort_values(by=["Easter_Eggs_Earned"], ascending=False)
 
     st.dataframe(df, use_container_width=True, width=500, height=500)
 
@@ -77,6 +78,7 @@ def load_data_single(user_name):
 
     # Convert the data to a DataFrame
     df = pd.DataFrame(rows, columns=column_data)
+    df = df.sort_values(by=["Easter_Eggs_Earned"], ascending=False)
 
     st.dataframe(df, use_container_width=True, width=500, height=500)
 
@@ -95,6 +97,7 @@ def load_data_multiple(user_name1, user_name2):
 
     # Convert the data to a DataFrame
     df = pd.DataFrame(rows, columns=column_data)
+    df = df.sort_values(by=["Easter_Eggs_Earned"], ascending=False)
 
     st.dataframe(df, use_container_width=True, width=500, height=500)
 

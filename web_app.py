@@ -64,13 +64,13 @@ def load_data():
     st.dataframe(df, use_container_width=True, width=500, height=500)
 
 
-def load_data_single(user_name):
+def load_data_single(user_name_):
     # Connect to the database
     conn = sqlite3.connect("user_data_new.db")
     c = conn.cursor()
 
     # Select the necessary columns for the current user
-    c.execute(f"SELECT * from userData WHERE USER_NAME='{user_name}'")
+    c.execute(f"SELECT * from userData WHERE USER_NAME='{user_name_}'")
     rows = c.fetchall()
 
     # Close the connection

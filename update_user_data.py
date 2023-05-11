@@ -264,8 +264,6 @@ def golden_eggs_program_joined(user_name):
 
     connection.close()
 
-golden_eggs_program_joined('predatork4')
-
 
 def update_golden_eggs_sent_daily():
     connection = sqlite3.connect('user_data_new.db')
@@ -628,9 +626,22 @@ def total_user():
     print(total_accounts)
     print(len(total_accounts))
     connection2 = sqlite3.connect('user_data_new.db')
-    for account in total_accounts:
-        connection2.execute('INSERT INTO userData (USER_NAME) VALUES(?)', (account,))
-        print(account)
+    # for account in total_accounts:
+    #     connection2.execute('INSERT INTO userData (USER_NAME) VALUES(?)', (account,))
+    #     print(account)
+    cursor2 = connection2.execute("SELECT USER_NAME from userData")
+    existing_accounts = set()
+    for row in cursor2:
+        existing_accounts.add(row[0])
+
+    print(existing_accounts)
+    print(len(existing_accounts))
+
+    new_users = total_accounts.difference(existing_accounts)
+    print(new_users)
+
+    # for n in new_users:
+    #     connection2.execute('INSERT INTO userData (USER_NAME) VALUES(?)', (n,))
 
     connection2.commit()
     connection2.close()

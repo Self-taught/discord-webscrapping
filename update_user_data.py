@@ -240,7 +240,7 @@ def nr_days(d1, d2):
 
 
 # date_1 = date_n(2023, 4, 9)
-date_2 = date_n(2023, 5, 10)
+date_2 = date_n(2023, 5, 11)
 
 
 # print(nr_days(date_1, date_2))
@@ -530,6 +530,72 @@ def update_gift_mystery_seed():
     connection.close()
 
 
+def gifts_exchanged_ferti_plus(user_name):
+    connection = sqlite3.connect('easterData0905_2.db')
+    cursor = connection.execute(f"SELECT * from easterData WHERE USER_NAME='@{user_name}'")
+
+    nr = 0
+    pattern = f"[a-zA-Z0-9\.\-]+ exchanged  \d+ Easter Egg for (\d+) Ferti-Plus"
+
+    for row in cursor:
+        if re.search(pattern, row[2]):
+            match = re.search(pattern, row[2])
+            mystery_seed = int(match.group(1))
+            nr += mystery_seed
+
+    print(nr)
+    connection.close()
+    return nr
+
+
+def update_gift_ferti_plus():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute('SELECT USER_NAME from userData')
+
+    for row in cursor:
+        print(row[0])
+        nr_ferti_plus = gifts_exchanged_ferti_plus(row[0])
+        connection.execute(f'UPDATE userData '
+                           f'SET Ferti_PLus_Exchanged = {nr_ferti_plus} '
+                           f'WHERE USER_NAME = "{row[0]}"')
+
+    connection.commit()
+    connection.close()
+
+
+def gifts_exchanged_speed_gro(user_name):
+    connection = sqlite3.connect('easterData0905_2.db')
+    cursor = connection.execute(f"SELECT * from easterData WHERE USER_NAME='@{user_name}'")
+
+    nr = 0
+    pattern = f"[a-zA-Z0-9\.\-]+ exchanged  \d+ Easter Egg for (\d+) Speed-Gro"
+
+    for row in cursor:
+        if re.search(pattern, row[2]):
+            match = re.search(pattern, row[2])
+            mystery_seed = int(match.group(1))
+            nr += mystery_seed
+
+    print(nr)
+    connection.close()
+    return nr
+
+
+def update_gift_speed_gro():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute('SELECT USER_NAME from userData')
+
+    for row in cursor:
+        print(row[0])
+        nr_speed_gro = gifts_exchanged_speed_gro(row[0])
+        connection.execute(f'UPDATE userData '
+                           f'SET Speed_Gro_Exchanged = {nr_speed_gro} '
+                           f'WHERE USER_NAME = "{row[0]}"')
+
+    connection.commit()
+    connection.close()
+
+
 def get_everything(user_name):
     connection = sqlite3.connect('old_data/easterData26.db')
     cursor = connection.execute(f"SELECT * from easterData WHERE USER_NAME='@{user_name}'")
@@ -577,7 +643,6 @@ def calculate_easter_eggs_earned():
         total_points += row[0]
 
     connection.close()
-    print(total_points)
     return total_points
 
 
@@ -591,7 +656,6 @@ def calculate_gifts_received():
         total_points += row[0]
 
     connection.close()
-    print(total_points)
     return total_points
 
 
@@ -605,7 +669,6 @@ def calculate_gifts_sent():
         total_points += row[0]
 
     connection.close()
-    print(total_points)
     return total_points
 
 
@@ -619,7 +682,6 @@ def calculate_raffle_points():
         total_points += row[0]
 
     connection.close()
-    print(total_points)
     return total_points
 
 
@@ -633,7 +695,6 @@ def calculate_golden_eggs_bought():
         total_points += row[0]
 
     connection.close()
-    print(total_points)
     return total_points
 
 
@@ -647,13 +708,12 @@ def calculate_reward_chest_exchanged():
         total_points += row[0]
 
     connection.close()
-    print(total_points)
     return total_points
 
 
-def calculate_raffle_points():
+def calculate_mystery_seed_exchanged():
     connection = sqlite3.connect('user_data_new.db')
-    cursor = connection.execute("SELECT Raffle_Points_Earned from userData")
+    cursor = connection.execute("SELECT Mystery_Seed_Exchanged from userData")
 
     total_points = 0
 
@@ -661,4 +721,30 @@ def calculate_raffle_points():
         total_points += row[0]
 
     connection.close()
-    print(total_points)
+    return total_points
+
+
+def calculate_ferti_plus_exchanged():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute("SELECT Ferti_PLus_Exchanged from userData")
+
+    total_points = 0
+
+    for row in cursor:
+        total_points += row[0]
+
+    connection.close()
+    return total_points
+
+
+def calculate_speed_gro_exchanged():
+    connection = sqlite3.connect('user_data_new.db')
+    cursor = connection.execute("SELECT Speed_Gro_Exchanged from userData")
+
+    total_points = 0
+
+    for row in cursor:
+        total_points += row[0]
+
+    connection.close()
+    return total_points

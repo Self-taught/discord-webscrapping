@@ -259,9 +259,12 @@ def golden_eggs_program_joined(user_name):
             match = re.search(pattern_2, joined_date)
             date_joined = date_n(int(match.group(1)), int(match.group(2)), int(match.group(3)))
             nr_of_days_joined = nr_days(date_joined, date_2) + 1
+            print(nr_of_days_joined * 3)
             return nr_of_days_joined * 3
 
     connection.close()
+
+golden_eggs_program_joined('predatork4')
 
 
 def update_golden_eggs_sent_daily():
@@ -277,14 +280,14 @@ def update_golden_eggs_sent_daily():
         print('gifts sent', row[3])
         if nr_days_joined != 0 and nr_days_joined == row[3]:
             print('sent daily', row[0])
-            full_days = 32
+            full_days = 33
             connection.execute(f'UPDATE userData '
                                f'SET Daily_Gifts_Sent = {full_days} '
                                f'WHERE USER_NAME = "{row[0]}"')
         elif nr_days_joined != 0 and nr_days_joined != row[3]:
-            missed_days = (nr_days_joined - row[3]) / 3
+            final = row[3] / 3
             connection.execute(f'UPDATE userData '
-                               f'SET Daily_Gifts_Sent = {missed_days} '
+                               f'SET Daily_Gifts_Sent = {final} '
                                f'WHERE USER_NAME = "{row[0]}"')
         elif nr_days_joined == 0:
             zero_days = 0

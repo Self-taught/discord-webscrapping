@@ -110,7 +110,6 @@ if user_name:
 else:
     load_data()
 
-st.text('The daily gifts sent are 33 max for those who sent daily. For others, it"s no. of Missed days = 32 - days you sent gift.')
 
 def load_charts():
     # Connect to the database

@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from update_user_data import calculate_easter_eggs_earned, calculate_gifts_received, calculate_gifts_sent, \
     calculate_raffle_points, calculate_reward_chest_exchanged, calculate_golden_eggs_bought, \
-    calculate_mystery_seed_exchanged, calculate_ferti_plus_exchanged, calculate_speed_gro_exchanged
+    calculate_mystery_seed_exchanged, calculate_ferti_plus_exchanged, calculate_speed_gro_exchanged, total_packs_bought
 
 
 total_easter_eggs = calculate_easter_eggs_earned()
@@ -16,6 +16,7 @@ total_golden_eggs_bought = calculate_golden_eggs_bought()
 total_mystery_seed_exchanged = calculate_mystery_seed_exchanged()
 total_ferti_plus_exchanged = calculate_ferti_plus_exchanged()
 total_speed_gro_exchanged = calculate_speed_gro_exchanged()
+total_packs_bought = total_packs_bought()
 
 
 column_data = ["USER_NAME", "Easter_Eggs_Earned", "Gifts_Received", "Gifts_Sent",
@@ -34,7 +35,9 @@ with st.expander("Collective Data"):
         st.warning(f"Total Gifts Received: {total_gifts_received}")
         st.info(f"Total Reward Chest Exchanged: {total_reward_chest_exchanged}")
         st.success(f"Total Golden Eggs Bought: {total_golden_eggs_bought}")
+        st.info(f"Total Beta Packs Bought From Shop During The Event: {total_packs_bought}")
     with col2:
+        st.success(f"Total Users Participated in the event: 618")
         st.info(f"Total Raffle Points Earned: {total_raffle_points}")
         st.success(f"Total Mystery Seed Exchanged: {total_mystery_seed_exchanged}")
         st.warning(f"Total Ferti Plus Exchanged: {total_ferti_plus_exchanged}")

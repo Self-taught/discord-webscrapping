@@ -762,3 +762,59 @@ def calculate_speed_gro_exchanged():
 
     connection.close()
     return total_points
+
+
+def total_packs_bought():
+    connection = sqlite3.connect('packs_data_event.db')
+    cursor = connection.execute("SELECT Packs_Bought FROM packsData")
+
+    total_bought = 0
+
+    for row in cursor:
+        total_bought += row[0]
+
+    connection.close()
+    return total_bought
+
+
+def total_packs_buyers():
+    connection = sqlite3.connect('packs_data_event.db')
+    cursor = connection.execute('SELECT * FROM packsData')
+
+    buyers = set()
+    for row in cursor:
+        buyers.add(row[1])
+
+    for buyer in buyers:
+        connection.execute("INSERT INTO userPacksData (USER_NAME) VALUES(?)", (buyer, ))
+
+    connection.commit()
+    connection.close()
+    print(len(buyers))
+    print(buyers)
+
+
+def nr_each_user_packs(user_name):
+    connection = sqlite3.connect('packs_data_event.db')
+    cursor = connection.execute(f'SELECT * FROM packsData WHERE USER_NAME="{user_name}"')
+
+    total_nr = 0
+
+    for row in cursor:
+        total_nr += row[4]
+
+    connection.close()
+    return total_nr
+
+
+def update_each_buyer():
+    connection = sqlite3.connect('packs_data_event.db')
+    cursor = connection.execute('SELECT USER_NAME FROM userPacksData')
+
+    for row in cursor:
+        packs_bought_each = nr_each_user_packs(row[0])
+        connection.execute(f'UPDATE userPacksData '
+                           f'SET Packs_Bought = {packs_bought_each} '
+                           f'WHERE USER_NAME = "{row[0]}"')
+    connection.commit()
+    connection.close()

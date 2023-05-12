@@ -29,3 +29,20 @@ import sqlite3
 # ''')
 #
 # connection.close()
+
+
+# CREATE A TABLE FOR Packs Bought
+
+# connection = sqlite3.connect('packs_data_event.db')
+# connection.execute('''ALTER TABLE userPacksData
+# ADD Packs_Bought INT;
+# ''')
+# connection.commit()
+# connection.close()
+
+# connection = sqlite3.connect('packs_data_event.db')
+# connection.execute('''ALTER TABLE packsData
+# ADD Packs_Bought INT;
+# ''')
+#
+# connection.close()

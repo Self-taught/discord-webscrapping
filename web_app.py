@@ -37,7 +37,7 @@ with st.expander("Collective Data"):
         st.success(f"Total Golden Eggs Bought: {total_golden_eggs_bought}")
         st.info(f"Total Beta Packs Bought From Shop During The Event: {total_packs_bought}")
     with col2:
-        st.success(f"Total Users Participated in the event: 618")
+        st.success(f"Total Accounts Participated in the event: 618")
         st.info(f"Total Raffle Points Earned: {total_raffle_points}")
         st.success(f"Total Mystery Seed Exchanged: {total_mystery_seed_exchanged}")
         st.warning(f"Total Ferti Plus Exchanged: {total_ferti_plus_exchanged}")

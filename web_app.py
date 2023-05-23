@@ -6,7 +6,6 @@ from update_user_data import calculate_easter_eggs_earned, calculate_gifts_recei
     calculate_raffle_points, calculate_reward_chest_exchanged, calculate_golden_eggs_bought, \
     calculate_mystery_seed_exchanged, calculate_ferti_plus_exchanged, calculate_speed_gro_exchanged, total_packs_bought
 
-
 total_easter_eggs = calculate_easter_eggs_earned()
 total_gifts_received = calculate_gifts_received()
 total_gifts_sent = calculate_gifts_sent()
@@ -24,6 +23,11 @@ column_data = ["USER_NAME", "Easter_Eggs_Earned", "Gifts_Received", "Gifts_Sent"
                "Iron_Ore_Exchanged", "Fairy_Garden_Exchanged", "Beta_Packs_Exchanged", "Alpha_Packs_Exchanged",
                "King_Weed_Exchanged", "Lucky_Cat_Exchanged", "Mystery_Seed_Exchanged",
                "Ferti_Plus_Exchanged", "Speed_Gro_Exchanged"]
+
+column_data_raffle = ["USER_NAME", "Raffle_Points", "Fairy_Garden", "King_Weed", "Iron_Ore",
+                      "Gold_Ore", "Alpha_Packs", "Beta_Packs",
+                      "Hive_Earned", "Profit_Loss_Hive", "Profit_Loss_Percentage"]
+
 
 st.set_page_config(layout="wide")
 st.title('Easter 2023 Dcrops')
@@ -44,9 +48,105 @@ with st.expander("Collective Data"):
         st.info(f"Total Speed Gro Exchanged: {total_speed_gro_exchanged}")
 
 
-st.subheader("Find a single user or compare two users data")
-user_name = st.text_input('Find A User Data', key='user_name', placeholder="To compare two users, type user1,user2 withour any space")
+# ....................................................................................
 
+st.subheader("Raffle Data Analysis")
+
+st.info('To figure out profit/loss, raffle points are considered = 1 hive.'
+        ' Most people sent beta common recipies to earn raffle points which were selling at 0.25-0.27 hive. '
+        '')
+st.success('To Calculate hive earned and profit/loss => Current price of an item in the market X no of items won during '
+           'raffle')
+
+col_1, col_2 = st.columns(2)
+
+with col_1:
+    st.warning('Fairy Garden = 145 hive')
+    st.warning('King Weed = 39.90 hive')
+    st.warning('Iron Ore = 8.20 hive')
+
+with col_2:
+    st.warning('Gold Ore = 4.89 hive')
+    st.warning('Alpha Pack = 7')
+    st.warning('Beta Pack = 6.9 hive')
+
+
+
+user_name_raffle = st.text_input('Find A User Data', key='user_name_raffle', placeholder="To compare two users, type user1,user2 withour any space")
+
+def load_data_raffle():
+    # Connect to the database
+    conn = sqlite3.connect("user_data_new.db")
+    c = conn.cursor()
+
+    # Select the necessary columns for the current user
+    c.execute(f"SELECT * from raffleData")
+    rows = c.fetchall()
+
+    # Close the connection
+    conn.close()
+
+    # Convert the data to a DataFrame
+    df = pd.DataFrame(rows, columns=column_data_raffle)
+    df = df.sort_values(by=["Raffle_Points"], ascending=False)
+
+    st.dataframe(df, use_container_width=True, width=500, height=500)
+
+
+def load_data_single_raffle(user_name_):
+    # Connect to the database
+    conn = sqlite3.connect("user_data_new.db")
+    c = conn.cursor()
+
+    # Select the necessary columns for the current user
+    c.execute(f"SELECT * from raffleData WHERE USER_NAME='{user_name_}'")
+    rows = c.fetchall()
+
+    # Close the connection
+    conn.close()
+
+    # Convert the data to a DataFrame
+    df = pd.DataFrame(rows, columns=column_data_raffle)
+    df = df.sort_values(by=["Raffle_Points"], ascending=False)
+
+    st.dataframe(df, use_container_width=True, width=500, height=500)
+
+
+def load_data_multiple_raffle(user_name1, user_name2):
+    # Connect to the database
+    conn = sqlite3.connect("user_data_new.db")
+    c = conn.cursor()
+
+    # Select the necessary columns for the current user
+    c.execute(f"SELECT * from raffleData WHERE USER_NAME IN ('{user_name1}', '{user_name2}')")
+    rows = c.fetchall()
+
+    # Close the connection
+    conn.close()
+
+    # Convert the data to a DataFrame
+    df = pd.DataFrame(rows, columns=column_data_raffle)
+    df = df.sort_values(by=["Raffle_Points"], ascending=False)
+
+    st.dataframe(df, use_container_width=True, width=500, height=500)
+
+
+if user_name_raffle:
+    if ',' in user_name_raffle:
+        users = user_name_raffle.split(',')
+        print(users)
+        load_data_multiple_raffle(users[0], users[1])
+    else:
+        print(user_name_raffle)
+        load_data_single_raffle(user_name_raffle)
+else:
+    load_data_raffle()
+
+# ....................................................................................
+
+st.subheader("Find a single user or compare two users data")
+user_name = st.text_input('Find A User Data', key='user_name', placeholder="To compare two users, type user1,user2 "
+                                                                           "without any space")
 
 def load_data():
     # Connect to the database
